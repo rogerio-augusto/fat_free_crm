@@ -135,6 +135,14 @@ class Opportunity < ActiveRecord::Base
     end
     opportunity
   end
+  
+  def self.stages_snapshot
+    @report_item ||= Struct.new(:stage, :total)
+    report_data = Opportunity.count(:stage, :group => :stage)
+    formatted_report_data = []
+    report_data.each_key{|k| formatted_report_data << @report_item.new(k, report_data[k])}
+    formatted_report_data
+  end
 
   private
   # Make sure at least one user has been selected if the contact is being shared.

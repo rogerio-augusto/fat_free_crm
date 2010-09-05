@@ -6,12 +6,19 @@ class Admin::OpportunitiesReportsController < ApplicationController
   end
 
   def graph_code
-    title = Title.new("MY TITLE")
-    bar = BarGlass.new
-    bar.set_values([1,2,3,4,5,6,7,8,9])
+    report_data = Opportunity.stages_snapshot
+    
+    bar = Bar.new
+    bar.set_values(report_data.collect(&:total))
+    
+    x_axis = XAxis.new
+    x_axis.labels = report_data.collect(&:stage)
+    
     chart = OpenFlashChart.new
-    chart.set_title(title)
+    chart.set_title(Title.new "Oportunidades por status")
+    chart.x_axis = x_axis
     chart.add_element(bar)
+    
     render :text => chart.to_s
   end
 end
