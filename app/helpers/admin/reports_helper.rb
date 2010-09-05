@@ -1,4 +1,4 @@
-module Admin::OpportunitiesReportsHelper
+module Admin::ReportsHelper
   def render_graphic(stages)
     Seer::visualize(stages, 
                     :as => :column_chart, 

@@ -122,7 +122,7 @@ task_calendar_with_time: false
 
 :admin_tabs: [
   { :active : true,  :text : :admin_tab_users,    :url : { :controller : "admin/users"    } },
-  { :active : false, :text : :admin_tab_settings, :url : { :controller : "admin/settings" } },
+  { :active : false, :text : :admin_tab_reports,  :url : { :controller : "admin/reports"  } },
   { :active : false, :text : :admin_tab_plugins,  :url : { :controller : "admin/plugins"  } }
 ]
 
