@@ -10,7 +10,9 @@
     = javascript_include_tag :defaults, :cache => "cache/all"
     = javascript_include_tag "crm_classes.js", "modalbox.js", "jquery-1.4.2.min", :cache => "cache/classes"
     = yield :head
-    %script{:type => "text/javascript"}= yield :javascript
+    %script{:type => "text/javascript"}
+      jQuery.noConflict();
+      = yield :javascript
 
   %body.admin
     = render :partial => "layouts/admin/header"
