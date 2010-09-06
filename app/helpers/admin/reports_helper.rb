@@ -22,7 +22,7 @@ module Admin::ReportsHelper
   
   def render_snapshot_by_assignment
     Seer::visualize(@users, 
-          :as => :line_chart,
+          :as => :area_chart,
           :in_element => 'chart',
           :series => {
             :series_label => :first_name,
@@ -34,7 +34,7 @@ module Admin::ReportsHelper
             :height => 300,
             :width => 600,
             :axis_font_size => 11,
-            :colors => ['#7e7587','#990000','#009900'],
+            :colors => ['#7e7587','#990000','#009900','#005590'],
             :title => "Widget Quantities",
             :point_size => 5
           }

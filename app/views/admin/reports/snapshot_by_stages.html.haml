@@ -1,6 +1,3 @@
 = render :partial => 'reports_submenu'
 
-= Seer::init_visualization
-
-#chart
-	= render_snapshot_by_stages(@stages)
+= high_chart("chart-container-1", @stages_report)
