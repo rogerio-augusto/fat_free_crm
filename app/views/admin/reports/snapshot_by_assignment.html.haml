@@ -1,4 +1,4 @@
 = render :partial => 'reports_submenu'
 
-= high_chart("chart-container-1", @bar) do
-	= "options.tooltip.formatter = function() { return '<b>' + this.series.name +' = ' + this.y + '</b>';}"
+- high_chart("chart-container-1", @assignment_report) do |chart|
+	= "options.tooltip.formatter = function() { return '<b>' + this.series.name + ' = ' + this.y + '</b>';}"

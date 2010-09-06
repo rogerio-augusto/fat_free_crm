@@ -1,34 +1,7 @@
 = content_for :head do
 	= javascript_include_tag :high_charts
-/ = content_for :javascript do
-/ 	:plain
-/ 		var chart1; // globally available
-/ 		$(document).ready(function() {
-/ 		      chart1 = new Highcharts.Chart({
-/ 		         chart: {
-/ 		            renderTo: 'chart-container-1',
-/ 		            defaultSeriesType: 'bar'
-/ 		         },
-/ 		         title: {
-/ 		            text: 'Fruit Consumption'
-/ 		         },
-/ 		         xAxis: {
-/ 		            categories: ['Apples', 'Bananas', 'Oranges']
-/ 		         },
-/ 		         yAxis: {
-/ 		            title: {
-/ 		               text: 'Fruit eaten'
-/ 		            }
-/ 		         },
-/ 		         series: [{
-/ 		            name: 'Jane',
-/ 		            data: [1, 0, 4]
-/ 		         }, {
-/ 		            name: 'John',
-/ 		            data: [5, 7, 3]
-/ 		         }]
-/ 		      });
-/ 		   });
-	
-= link_to 'Modalidades por estágio', snapshot_by_stages_admin_reports_path | 
+|	
+= link_to 'Oportunidades por estágio', snapshot_by_stages_admin_reports_path 
+| 
 = link_to 'Oportunidades por pessoa', snapshot_by_assignment_admin_reports_path
+|

@@ -129,7 +129,7 @@ class User < ActiveRecord::Base
     
     formatted_report_data = []
     
-    @report_data.each_key{|k| formatted_report_data << report_item.new(k, @report_data[k])}
+    @report_data.each_key{|k| formatted_report_data << report_item.new(I18n.t(k), @report_data[k])}
     formatted_report_data
   end
 

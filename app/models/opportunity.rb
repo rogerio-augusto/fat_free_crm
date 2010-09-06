@@ -142,7 +142,7 @@ class Opportunity < ActiveRecord::Base
     
     formatted_report_data = []
     
-    report_data.each_key{|k| formatted_report_data << report_item.new(k, report_data[k])}
+    report_data.each_key{|k| formatted_report_data << report_item.new(I18n.t(k), report_data[k])}
     formatted_report_data
   end
   
@@ -152,7 +152,7 @@ class Opportunity < ActiveRecord::Base
     
     formatted_report_data = []
     
-    report_data.each{|opportunity| formatted_report_data << report_item.new(opportunity.assignee.try(:name) || '', opportunity.stage, opportunity.total)}
+    report_data.each{|opportunity| formatted_report_data << report_item.new(opportunity.assignee.try(:name) || '', I18n.t(opportunity.stage), opportunity.total)}
     formatted_report_data
   end
 
