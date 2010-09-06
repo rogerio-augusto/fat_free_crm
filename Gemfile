@@ -4,6 +4,7 @@ gem "rails", '~> 2.3.9', :require => nil
 gem 'will_paginate', '~> 2.3.14'
 gem "mysql"
 gem "seer"
+gem "searchlogic"
 
 group :development do
   gem "mongrel"
@@ -27,4 +28,7 @@ end
 group :development, :test do
   gem "ruby-debug"
   gem 'awesome_print', :require => 'ap'
+  gem "wirble" 
+  gem "hirb"
+  gem "interactive_editor"
 end

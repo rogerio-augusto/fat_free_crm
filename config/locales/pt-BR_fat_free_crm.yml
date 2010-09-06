@@ -54,8 +54,8 @@ pt-BR:
   proposal: Proposta
   negotiation: Negociação
   final_review: Revisão final
-  won: Fechado/Conquistado
-  lost: Fechado/Perdido
+  won: Ganho
+  lost: Perdido
 
   call: Ligação
   email: Email

@@ -64,6 +64,7 @@ class User < ActiveRecord::Base
   has_many    :leads
   has_many    :contacts
   has_many    :opportunities
+  has_many    :assigned_opportunities, :class_name => "Opportunity", :foreign_key => :assigned_to
   has_many    :activities,  :dependent => :destroy
   has_many    :permissions, :dependent => :destroy
   has_many    :preferences, :dependent => :destroy
@@ -121,6 +122,16 @@ class User < ActiveRecord::Base
     Notifier.deliver_password_reset_instructions(self)
   end
 
+  #----------------------------------------------------------------------------
+  def opportunity_report
+    @report_data ||= Opportunity.count(:stage, :conditions => {:assigned_to => self.id}, :group => :stage)
+    report_item = Struct.new(:stage, :total)
+    
+    formatted_report_data = []
+    
+    @report_data.each_key{|k| formatted_report_data << report_item.new(k, @report_data[k])}
+    formatted_report_data
+  end
 
   private
 

@@ -57,7 +57,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users, :collection => { :search => :get, :auto_complete => :post }, :member => { :suspend => :put, :reactivate => :put, :confirm => :get }
     admin.resources :settings
     admin.resources :plugins
-    admin.resources :reports, :collection => {:snapshot_by_stages => :get}
+    admin.resources :reports, :collection => {:snapshot_by_stages => :get, :snapshot_by_assignment => :get}
   end
 
   # Sample of regular route:

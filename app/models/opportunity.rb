@@ -54,7 +54,7 @@ class Opportunity < ActiveRecord::Base
   named_scope :assigned_to, lambda { |user| { :conditions => [ "assigned_to = ?" ,user.id ] } }
   named_scope :not_lost, { :conditions => "opportunities.stage <> 'lost'"}
 
-  simple_column_search :name, :match => :middle, :escape => lambda { |query| query.gsub(/[^\w\s\-\.']/, "").strip }
+  #simple_column_search :name, :match => :middle, :escape => lambda { |query| query.gsub(/[^\w\s\-\.']/, "").strip }
   uses_user_permissions
   acts_as_commentable
   acts_as_paranoid
@@ -137,10 +137,22 @@ class Opportunity < ActiveRecord::Base
   end
   
   def self.stages_snapshot
-    @report_item ||= Struct.new(:stage, :total)
+    report_item = Struct.new(:stage, :total)
     report_data = Opportunity.count(:stage, :group => :stage)
+    
     formatted_report_data = []
-    report_data.each_key{|k| formatted_report_data << @report_item.new(k, report_data[k])}
+    
+    report_data.each_key{|k| formatted_report_data << report_item.new(k, report_data[k])}
+    formatted_report_data
+  end
+  
+  def self.assignement_snapshot
+    report_item = Struct.new(:assignee, :stage, :total)
+    report_data = Opportunity.all(:select => 'assigned_to, stage, count(assigned_to) as total', :group => 'assigned_to, stage')
+    
+    formatted_report_data = []
+    
+    report_data.each{|opportunity| formatted_report_data << report_item.new(opportunity.assignee.try(:name) || '', opportunity.stage, opportunity.total)}
     formatted_report_data
   end
 

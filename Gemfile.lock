@@ -41,6 +41,9 @@ GEM
     gherkin (2.1.5)
       trollop (~> 1.16.2)
     highline (1.6.1)
+    hirb (0.3.3)
+    interactive_editor (0.0.4)
+      spoon (>= 0.0.1)
     json_pure (1.4.6)
     linecache (0.43)
     mongrel (1.1.5)
@@ -88,7 +91,10 @@ GEM
       ruby-debug-base (~> 0.10.3.0)
     ruby-debug-base (0.10.3)
       linecache (>= 0.3)
+    searchlogic (2.4.24)
+      activerecord (>= 2.0.0)
     seer (0.7.0)
+    spoon (0.0.1)
     term-ansicolor (1.0.5)
     trollop (1.16.2)
     webrat (0.7.1)
@@ -109,6 +115,8 @@ DEPENDENCIES
   database_cleaner
   factory_girl
   faker (~> 0.3.1)
+  hirb
+  interactive_editor
   mongrel
   mysql
   rails (~> 2.3.9)
@@ -117,6 +125,7 @@ DEPENDENCIES
   rspec (>= 1.2.9)
   rspec-rails (>= 1.2.9)
   ruby-debug
+  searchlogic
   seer
   webrat (>= 0.6.0)
   will_paginate (~> 2.3.14)

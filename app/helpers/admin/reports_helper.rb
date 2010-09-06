@@ -1,5 +1,5 @@
 module Admin::ReportsHelper
-  def render_graphic(stages)
+  def render_snapshot_by_stages(stages)
     Seer::visualize(stages, 
                     :as => :column_chart, 
                     :in_element =>'chart', 
@@ -18,5 +18,26 @@ module Admin::ReportsHelper
                       #                       :title_y => 'Quantidade'
                     }
                   )
+  end
+  
+  def render_snapshot_by_assignment
+    Seer::visualize(@users, 
+          :as => :line_chart,
+          :in_element => 'chart',
+          :series => {
+            :series_label => :first_name,
+            :data_label => :stage,
+            :data_method => :total,
+            :data_series => @series
+          },
+          :chart_options => { 
+            :height => 300,
+            :width => 600,
+            :axis_font_size => 11,
+            :colors => ['#7e7587','#990000','#009900'],
+            :title => "Widget Quantities",
+            :point_size => 5
+          }
+         )
   end
 end
