@@ -38,24 +38,32 @@ class Admin::ReportsController < Admin::ApplicationController
   end
   
   def snapshot_by_assignment
-    # @users = User.all.reject{|u| u.assigned_opportunities.count < 1}
-    # @series = @users.collect(&:opportunity_report)
+    @users = User.all.reject{|u| u.assigned_opportunities.count < 1}
     
     @bar = HighChart.new('column') do |f|
-          f.series(:name=>'John',:data=> [3, 20, 3, 5, 4, 10, 12 ])
-          f.series(:name=>'Jane',:data=>[1, 3, 4, 3, 3, 5, 4,-46] )		
-          f.title({ :text=>"example test title from controller"})
-
-          ###  Options for Bar
-          ### f.options[:chart][:defaultSeriesType] = "bar"
-          ### f.plot_options({:series=>{:stacking=>"normal"}}) 
-
-          ## or options for column
-          f.options[:chart][:defaultSeriesType] = "column"
-          f.plot_options({:column=>{:stacking=>"percent"}})
+      f.chart({:defaultSeriesType => "bar"})
+      f.title({:text=>"Estágios de oportunidade por pessoa"})
+      f.legend({:reversed => true})
+      f.plot_options({:series=>{:stacking=>"normal"}})
+      f.x_axis(:categories => @users.collect(&:first_name))
+      f.y_axis({:title => {:text => 'Legenda'}})
+      
+      # Obtenho todos os estágios diferentes entre os usuários
+      stages = @users.inject([]){|stages, user| stages += user.opportunity_report.collect(&:stage)}.uniq
+      
+      # Adiciono o total de oportunidades no estágio X por usuário, ou 0 se o usuário não possui nenhuma oportunidade neste estágio.
+      # Deve gerar a seguinte matriz:
+      #  f.series(:name => 'won', :data => [0,3,5,2])
+      # Onde cada posição em :data corresponde ao total de oportunidades do usuário naquela posição
+      stages.each do |stage|
+        data = []
+        @users.each do |user|
+          user_data = user.opportunity_report.collect{|r| r.total if r.stage == stage}
+          user_data.compact.blank? ? data << 0 : data += user_data.compact
         end
-    
-    
+        f.series(:name => stage, :data => data)
+      end
+    end
   end
 
 end
